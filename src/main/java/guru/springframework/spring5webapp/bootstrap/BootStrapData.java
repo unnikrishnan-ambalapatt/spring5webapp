@@ -42,14 +42,13 @@ public class BootStrapData implements CommandLineRunner {
         Book fortress = new Book("Digital Fortress", "8888");
         dan.getBooks().add(fortress);
         fortress.getAuthors().add(dan);
+        fortress.setPublisher(penguin);
         authorRepository.save(dan);
         bookRepository.save(fortress);
         penguin.getBooks().add(fortress);
 
         System.out.println("Number of authors: " + authorRepository.count());
         System.out.println("Number of books: " + bookRepository.count());
-
-
 
         System.out.println("Number of publishers: " + publisherRepository.count());
     }
