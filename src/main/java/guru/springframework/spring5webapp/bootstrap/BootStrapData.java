@@ -25,12 +25,18 @@ public class BootStrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        Publisher penguin = new Publisher("Penguin", "Pen St, BC");
+        publisherRepository.save(penguin);
+
         Author robin = new Author("Robin", "Sharma");
         Book monk = new Book("The Monk who Sold his Ferrari", "55555");
         robin.getBooks().add(monk);
         monk.getAuthors().add(robin);
+        monk.setPublisher(penguin);
         authorRepository.save(robin);
         bookRepository.save(monk);
+        penguin.getBooks().add(monk);
 
         Author dan = new Author("Dan", "Brown");
         Book fortress = new Book("Digital Fortress", "8888");
@@ -38,12 +44,13 @@ public class BootStrapData implements CommandLineRunner {
         fortress.getAuthors().add(dan);
         authorRepository.save(dan);
         bookRepository.save(fortress);
+        penguin.getBooks().add(fortress);
 
         System.out.println("Number of authors: " + authorRepository.count());
         System.out.println("Number of books: " + bookRepository.count());
 
-        Publisher penguin = new Publisher("Penguin", "Pen St, BC");
-        publisherRepository.save(penguin);
+
+
         System.out.println("Number of publishers: " + publisherRepository.count());
     }
 }
